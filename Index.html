@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Brotberechnung</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif, height: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+				height: 20px
+				padding: 0px
+        }
+        label {
+            display: inline-block;
+            width: 150px;
+        }
+        .result-group {
+            margin-top: 30px;
+        }
+        .result-row {
+            margin: 10px 0;
+            padding: 5px;
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Brotberechnung</h1>
+    
+    <div class="input-group">
+        <label for="input1">Gesamt Mehl (g):</label>
+        <input type="number" id="input1" oninput="calculateResults()">
+    </div>
+    
+    
+    <div class="input-group">
+        <label for="input2">Versäuerung (%):</label>
+        <select id="input2" onchange="calculateResults()">
+            <script>
+                for(let i = 0; i <= 100; i += 5) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label for="input3">TA :</label>
+       <select id="input3" onchange="calculateResults()">
+            <script>
+                for(let i = 150; i <= 250; i += 10) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+ 		</div>
+
+    <div class="result-group">
+        <h2>Ergebnisse:</h2>
+        <div class="result-row">
+            <label>Ergebnis 1:</label>
+            <span id="result1">0</span> (Eingabe 1 × 2)
+        </div>
+        <div class="result-row">
+            <label>Ergebnis 2:</label>
+            <span id="result2">0</span> (Eingabe 2 + 10)
+        </div>
+        <div class="result-row">
+            <label>Ergebnis 3:</label>
+            <span id="result3">0</span> (Eingabe 3 × 1.5)
+        </div>
+        <div class="result-row">
+            <label>Ergebnis 4:</label>
+            <span id="result4">0</span> (Summe aller Eingaben)
+        </div>
+        <div class="result-row">
+            <label>Ergebnis 5:</label>
+            <span id="result5">0</span> (Durchschnitt der Eingaben)
+        </div>
+        <div class="result-row">
+            <label>Ergebnis 6:</label>
+            <span id="result6">0</span> (Eingabe 1 + Eingabe 3)
+        </div>
+        <div class="result-row">
+            <label>Ergebnis 7:</label>
+            <span id="result7">0</span> (Eingabe 2 × Eingabe 3)
+        </div>
+        <div class="result-row">
+            <label>Ergebnis 8:</label>
+            <span id="result8">0</span> (Maximum der Eingaben)
+        </div>
+        <div class="result-row">
+            <label>Ergebnis 9:</label>
+            <span id="result9">0</span> (Minimum der Eingaben)
+        </div>
+        <div class="result-row">
+            <label>Ergebnis 10:</label>
+            <span id="result10">0</span> ((Eingabe 1 + Eingabe 2) × Eingabe 3)
+        </div>
+    </div>
+
+    <script>
+        function calculateResults() {
+            const input1 = Number(document.getElementById('input1').value) || 0;
+            const input2 = Number(document.getElementById('input2').value) || 0;
+            const input3 = Number(document.getElementById('input3').value) || 0;
+
+            // Berechnung der verschiedenen Ergebnisse
+            document.getElementById('result1').textContent = (input1 * 2).toFixed(2);
+            document.getElementById('result2').textContent = (input2 + 10).toFixed(2);
+            document.getElementById('result3').textContent = (input3 * 1.5).toFixed(2);
+            document.getElementById('result4').textContent = (input1 + input2 + input3).toFixed(2);
+            document.getElementById('result5').textContent = ((input1 + input2 + input3) / 3).toFixed(2);
+            document.getElementById('result6').textContent = (input1 + input3).toFixed(2);
+            document.getElementById('result7').textContent = (input2 * input3).toFixed(2);
+            document.getElementById('result8').textContent = Math.max(input1, input2, input3).toFixed(2);
+            document.getElementById('result9').textContent = Math.min(input1, input2, input3).toFixed(2);
+            document.getElementById('result10').textContent = ((input1 + input2) * input3).toFixed(2);
+        }
+    </script>
+</body>
+</html>
