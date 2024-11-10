@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brotberechnung</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            font-size: 16pt;
+            color: green;
+        }
+        .input-field, .output-field {
+            font-size: 16pt;
+            color: blue;
+            margin: 5px;
+        }
+        .label {
+            font-size: 12pt;
+            margin-right: 5px;
+        }
+        .result-row {
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function berechnen() {
+            let mehlmenge = parseFloat(document.getElementById("mehlmenge").value) || 0;
+            let versaeuerung = parseFloat(document.getElementById("versaeuerung").value) || 0;
+
+            // Berechnungen für die einzelnen Felder
+            let result1 = mehlmenge * versaeuerung / 100 * 21 / 430;
+            let result2 = mehlmenge * versaeuerung / 100 * 32 / 430;
+            let result3 = mehlmenge * versaeuerung / 100 * 156 / 430;
+            let result4 = mehlmenge * versaeuerung / 100 * 92 / 430;
+            let result5 = mehlmenge * versaeuerung / 100 * 250 / 430;
+            let result6 = mehlmenge * versaeuerung / 100 * 304 / 430;
+            let result7 = mehlmenge * versaeuerung / 100 * 5 / 430;
+            let result8 = mehlmenge * (1-versaeuerung / 100);
+            let result9 = mehlmenge * versaeuerung / 100;
+            let result10 = mehlmenge * 0.02;
+            let result11 = mehlmenge * versaeuerung / 100 + 234;
+            let result12 = result11;
+
+            // Ergebnisfelder aktualisieren
+            document.getElementById("result1").value = result1.toFixed(1);
+            document.getElementById("result2").value = result2.toFixed(1);
+            document.getElementById("result3").value = result3.toFixed(2);
+            document.getElementById("result4").value = result4.toFixed(2);
+            document.getElementById("result5").value = result5.toFixed(2);
+            document.getElementById("result6").value = result6.toFixed(2);
+            document.getElementById("result7").value = result7.toFixed(2);
+            document.getElementById("result8").value = result8.toFixed(0);
+            document.getElementById("result9").value = result9.toFixed(2);
+            document.getElementById("result10").value = result10.toFixed(2);
+            document.getElementById("result11").value = result11.toFixed(2);
+            document.getElementById("result12").value = result12.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Brotberechnung</h1>
+
+    <!-- Eingabefelder -->
+    <div class="input-field">
+        <label class="label" for="mehlmenge">Mehlmenge (g):</label>
+        <input type="number" id="mehlmenge" class="input-field" oninput="berechnen()">
+    </div>
+    <div class="input-field">
+        <label class="label" for="versaeuerung">Versäuerung (%):</label>
+        <select id="versaeuerung" class="input-field" onchange="berechnen()">
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+            <option value="35">35</option>
+            <option value="40" selected>40</option>
+            <option value="45">45</option>
+            <option value="50">50</option>
+            <option value="55">55</option>
+            <option value="60">60</option>
+            <option value="65">65</option>
+            <option value="70">70</option>
+            <option value="75">75</option>
+            <option value="80">80</option>
+        </select>
+    </div>
+    <div class="input-field">
+        <label class="label" for="teigausbeute">Teigausbeute (TA):</label>
+        <select id="teigausbeute" class="input-field" onchange="berechnen()">
+            <option value="150">150</option>
+            <option value="160">160</option>
+            <option value="170">170</option>
+            <option value="180" selected>180</option>
+            <option value="190">190</option>
+            <option value="200">200</option>
+            <option value="210">210</option>
+            <option value="220">220</option>
+        </select>
+    </div>
+
+    <!-- Ergebnisfelder -->
+    <div class="result-row">
+        <label class="label">Stufe 1 ST-Mehl:</label>
+        <input type="text" id="result1" class="output-field" readonly>
+        <label class="label">ST-Wasser:</label>
+        <input type="text" id="result2" class="output-field" readonly>
+    </div>
+    <div class="result-row">
+        <label class="label">Stufe 2 ST-Mehl:</label>
+        <input type="text" id="result3" class="output-field" readonly>
+        <label class="label">ST-Wasser:</label>
+        <input type="text" id="result4" class="output-field" readonly>
+    </div>
+    <div class="result-row">
+        <label class="label">Stufe 3 ST-Mehl:</label>
+        <input type="text" id="result5" class="output-field" readonly>
+        <label class="label">ST-Wasser:</label>
+        <input type="text" id="result6" class="output-field" readonly>
+    </div>
+    <div class="result-row">
+        <label class="label">ST-Anstellgut:</label>
+        <input type="text" id="result7" class="output-field" readonly>
+        <label class="label">HT-Mehl:</label>
+        <input type="text" id="result8" class="output-field" readonly>
+    </div>
+    <div class="result-row">
+        <label class="label">HT-Wasser:</label>
+        <input type="text" id="result9" class="output-field" readonly>
+        <label class="label">HT-Salz:</label>
+        <input type="text" id="result10" class="output-field" readonly>
+    </div>
+    <div class="result-row">
+        <label class="label">Gesamt-Brotteil:</label>
+        <input type="text" id="result11" class="output-field" readonly>
+        <label class="label">xxx:</label>
+        <input type="text" id="result12" class="output-field" readonly>
+    </div>
+
+</body>
+</html>
