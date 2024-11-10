@@ -41,22 +41,22 @@
             let result8 = mehlmenge * (1-versaeuerung / 100);
             let result9 = mehlmenge * versaeuerung / 100;
             let result10 = mehlmenge * 0.02;
-            let result11 = mehlmenge * versaeuerung / 100 + 234;
-            let result12 = result11;
+            let result11 = mehlmenge * versaeuerung / 100;
+            let result12 = mehlmenge * (1-versaeuerung / 100);
 
             // Ergebnisfelder aktualisieren
             document.getElementById("result1").value = result1.toFixed(1);
             document.getElementById("result2").value = result2.toFixed(1);
-            document.getElementById("result3").value = result3.toFixed(2);
-            document.getElementById("result4").value = result4.toFixed(2);
-            document.getElementById("result5").value = result5.toFixed(2);
-            document.getElementById("result6").value = result6.toFixed(2);
-            document.getElementById("result7").value = result7.toFixed(2);
+            document.getElementById("result3").value = result3.toFixed(1);
+            document.getElementById("result4").value = result4.toFixed(1);
+            document.getElementById("result5").value = result5.toFixed(1);
+            document.getElementById("result6").value = result6.toFixed(1);
+            document.getElementById("result7").value = result7.toFixed(1);
             document.getElementById("result8").value = result8.toFixed(0);
             document.getElementById("result9").value = result9.toFixed(2);
-            document.getElementById("result10").value = result10.toFixed(2);
-            document.getElementById("result11").value = result11.toFixed(2);
-            document.getElementById("result12").value = result12.toFixed(2);
+            document.getElementById("result10").value = result10.toFixed(0);
+            document.getElementById("result11").value = result11.toFixed(0));
+            document.getElementById("result12").value = result12.toFixed(0);
         }
     </script>
 </head>
@@ -88,7 +88,7 @@
         </select>
     </div>
     <div class="input-field">
-        <label class="label" for="teigausbeute">Teigausbeute (TA):</label>
+        <label class="label" for="teigausbeute">HT-Teigausbeute:</label>
         <select id="teigausbeute" class="input-field" onchange="berechnen()">
             <option value="150">150</option>
             <option value="160">160</option>
@@ -102,6 +102,14 @@
     </div>
 
     <!-- Ergebnisfelder -->
+		<div class="result-row">
+		
+		
+        <label class="label">ST-Anstellgut:</label>
+        <input type="text" id="result7" class="output-field" readonly>
+        <label class="label">HT-Mehl:</label>
+        <input type="text" id="result8" class="output-field" readonly>
+    </div>
     <div class="result-row">
         <label class="label">Stufe 1 ST-Mehl:</label>
         <input type="text" id="result1" class="output-field" readonly>
@@ -120,12 +128,7 @@
         <label class="label">ST-Wasser:</label>
         <input type="text" id="result6" class="output-field" readonly>
     </div>
-    <div class="result-row">
-        <label class="label">ST-Anstellgut:</label>
-        <input type="text" id="result7" class="output-field" readonly>
-        <label class="label">HT-Mehl:</label>
-        <input type="text" id="result8" class="output-field" readonly>
-    </div>
+  
     <div class="result-row">
         <label class="label">HT-Wasser:</label>
         <input type="text" id="result9" class="output-field" readonly>
