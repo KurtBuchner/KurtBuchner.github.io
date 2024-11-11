@@ -1,156 +1,193 @@
 <!DOCTYPE html>
-<html lang="de">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brotberechnung</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
         }
+        
         h1 {
-            font-size: 16pt;
             color: green;
-        }
-        .input-field {
             font-size: 16pt;
-            color: blue;
         }
-        .result-label, .result-field {
-            font-size: 12pt;
-        }
-        hr {
-            margin-top: 20px;
+        
+        .input-section {
             margin-bottom: 20px;
         }
-        .container {
-            display: flex;
-            flex-wrap: wrap;
+        
+        .input-field {
+            margin: 10px 0;
+            color: blue;
+            font-size: 16pt;
         }
-        .result-item {
-            width: 25%;
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
+        
+        .input-field input, .input-field select {
+            font-size: 16pt;
+            margin-left: 10px;
         }
+        
+        hr {
+            margin: 20px 0;
+            border: 1px solid #ccc;
+        }
+        
+        .results {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            font-size: 14pt;
+        }
+        
+        .result-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 0px;
+            display: flex;
+            align-items: left;
+            
+        }
+        
         .result-label {
             margin-right: 10px;
-            width: 150px;
+        }
+        
+        .result-value {
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <h1>Brotberechnung</h1>
-
-    <label>Mehlmenge (g):</label>
-    <input type="number" id="mehlmenge" class="input-field" value="" oninput="calculateResults()"><br>
-
-    <label>Versäuerung (%):</label>
-    <select id="versaeuerung" class="input-field" onchange="calculateResults()">
-        <script>
-            for (let i = 20; i <= 80; i += 5) {
-                document.write(`<option value="${i}" ${i === 35 ? 'selected' : ''}>${i}</option>`);
-            }
-        </script>
-    </select><br>
-
-    <label>Teigausbeute (TA):</label>
-    <select id="teigausbeute" class="input-field" onchange="calculateResults()">
-        <script>
-            for (let i = 150; i <= 200; i += 5) {
-                document.write(`<option value="${i}" ${i === 180 ? 'selected' : ''}>${i}</option>`);
-            }
-        </script>
-    </select>
-
+    
+    <div class="input-section">
+        <div class="input-field">
+            <label>Mehlmenge (g):</label>
+            <input type="number" id="mehlmenge" oninput="calculate()">
+        </div>
+        
+        <div class="input-field">
+            <label>Versäuerung (%):</label>
+            <select id="versaeuerung" onchange="calculate()">
+                <script>
+                    for(let i = 20; i <= 80; i += 5) {
+                        document.write(`<option value="${i}" ${i === 35 ? 'selected' : ''}>${i}</option>`);
+                    }
+                </script>
+            </select>
+        </div>
+        
+        <div class="input-field">
+            <label>Teigausbeute TA:</label>
+            <select id="ta" onchange="calculate()">
+                <script>
+                    for(let i = 150; i <= 200; i += 5) {
+                        document.write(`<option value="${i}" ${i === 180 ? 'selected' : ''}>${i}</option>`);
+                    }
+                </script>
+            </select>
+        </div>
+    </div>
+    
     <hr>
-
-    <div class="container">
-        <div class="result-item">
-            <span class="result-label">ST-Anstellgut:</span>
-            <span id="stAnstellgut" class="result-field">0.0</span>
+    
+    <div class="results">
+        <div class="result-box">
+            <span class="result-label">ST-Anstellgut</span>
+            <span id="st-anstellgut" class="result-value">0</span>
         </div>
-        <div class="result-item">
-            <span class="result-label">ST-Mehl gesamt:</span>
-            <span id="stMehlGesamt" class="result-field">0.0</span>
+        <div class="result-box">
+            <span class="result-label">ST-Mehl gesamt</span>
+            <span id="st-mehl-gesamt" class="result-value">0</span>
         </div>
-        <div class="result-item">
-            <span class="result-label">Stufe 1 ST-Mehl:</span>
-            <span id="stufe1StMehl" class="result-field">0.0</span>
+        <div class="result-box">
+            <span class="result-label">Stufe 1 ST-Mehl</span>
+            <span id="st-mehl-1" class="result-value">0</span>
         </div>
-        <div class="result-item">
-            <span class="result-label">ST-Wasser:</span>
-            <span id="stWasser1" class="result-field">0.0</span>
+        <div class="result-box">
+            <span class="result-label">Stufe 1 ST-Wasser</span>
+            <span id="st-wasser-1" class="result-value">0</span>
         </div>
-        <div class="result-item">
-            <span class="result-label">Stufe 2 ST-Mehl:</span>
-            <span id="stufe2StMehl" class="result-field">0.0</span>
+        <div class="result-box">
+            <span class="result-label">Stufe 2 ST-Mehl</span>
+            <span id="st-mehl-2" class="result-value">0</span>
         </div>
-        <div class="result-item">
-            <span class="result-label">ST-Wasser:</span>
-            <span id="stWasser2" class="result-field">0.0</span>
+        <div class="result-box">
+            <span class="result-label">Stufe 2 ST-Wasser</span>
+            <span id="st-wasser-2" class="result-value">0</span>
         </div>
-        <div class="result-item">
-            <span class="result-label">Stufe 3 ST-Mehl:</span>
-            <span id="stufe3StMehl" class="result-field">0.0</span>
+        <div class="result-box">
+            <span class="result-label">Stufe 3 ST-Mehl</span>
+            <span id="st-mehl-3" class="result-value">0</span>
         </div>
-        <div class="result-item">
-            <span class="result-label">ST-Wasser:</span>
-            <span id="stWasser3" class="result-field">0.0</span>
+        <div class="result-box">
+            <span class="result-label">Stufe 3 ST-Wasser</span>
+            <span id="st-wasser-3" class="result-value">0</span>
         </div>
-        <div class="result-item">
-            <span class="result-label">HT-Mehl:</span>
-            <span id="htMehl" class="result-field">0.0</span>
+        <div class="result-box">
+            <span class="result-label">HT-Mehl</span>
+            <span id="ht-mehl" class="result-value">0</span>
         </div>
-        <div class="result-item">
-            <span class="result-label">HT-Wasser:</span>
-            <span id="htWasser" class="result-field">0.0</span>
+        <div class="result-box">
+            <span class="result-label">HT-Wasser</span>
+            <span id="ht-wasser" class="result-value">0</span>
         </div>
-        <div class="result-item">
-            <span class="result-label">HT-Salz:</span>
-            <span id="htSalz" class="result-field">0.0</span>
+        <div class="result-box">
+            <span class="result-label">HT-Salz</span>
+            <span id="ht-salz" class="result-value">0</span>
         </div>
-        <div class="result-item">
-            <span class="result-label">Gesamt-TA:</span>
-            <span id="gesamtTA" class="result-field">0.0</span>
+        <div class="result-box">
+            <span class="result-label">Gesamt-TA</span>
+            <span id="gesamt-ta" class="result-value">0</span>
         </div>
-        <div class="result-item">
-            <span class="result-label">Gesamt-Teig:</span>
-            <span id="gesamtTeig" class="result-field">0.0</span>
+        <div class="result-box">
+            <span class="result-label">Gesamt-Teig</span>
+            <span id="gesamt-teig" class="result-value">0</span>
         </div>
     </div>
 
     <script>
-        function calculateResults() {
-            const mehlmenge = parseFloat(document.getElementById("mehlmenge").value) || 0;
-            const versaeuerung = parseFloat(document.getElementById("versaeuerung").value) || 0;
-            const ta = parseFloat(document.getElementById("teigausbeute").value) || 0;
-
+        function calculate() {
+            const mehlmenge = parseFloat(document.getElementById('mehlmenge').value) || 0;
+            const versaeuerung = parseFloat(document.getElementById('versaeuerung').value) || 35;
+            const ta = parseFloat(document.getElementById('ta').value) || 180;
+            
+            // Berechnungen
             const stMehlGesamt = mehlmenge * versaeuerung / 100;
-            document.getElementById("stAnstellgut").textContent = (stMehlGesamt * 5 / 430).toFixed(1);
-            document.getElementById("stMehlGesamt").textContent = stMehlGesamt.toFixed(1);
-            document.getElementById("stufe1StMehl").textContent = (stMehlGesamt * 21 / 430).toFixed(1);
-            document.getElementById("stWasser1").textContent = (stMehlGesamt * 32 / 430).toFixed(1);
-            document.getElementById("stufe2StMehl").textContent = (stMehlGesamt * 156 / 430).toFixed(1);
-            document.getElementById("stWasser2").textContent = (stMehlGesamt * 92 / 430).toFixed(1);
-            document.getElementById("stufe3StMehl").textContent = (stMehlGesamt * 250 / 430).toFixed(1);
-            document.getElementById("stWasser3").textContent = (stMehlGesamt * 304 / 430).toFixed(1);
-
+            const stAnstellgut = stMehlGesamt * 5/430;
+            const stMehl1 = stMehlGesamt * 21/430;
+            const stWasser1 = stMehlGesamt * 32/430;
+            const stMehl2 = stMehlGesamt * 156/430;
+            const stWasser2 = stMehlGesamt * 92/430;
+            const stMehl3 = stMehlGesamt * 250/430;
+            const stWasser3 = stMehlGesamt * 304/430;
             const htMehl = mehlmenge * (1 - versaeuerung / 100);
-            document.getElementById("htMehl").textContent = htMehl.toFixed(1);
-            document.getElementById("htWasser").textContent = (htMehl * 0.8).toFixed(1);
-            document.getElementById("htSalz").textContent = (mehlmenge * 0.02).toFixed(1);
-
-            // Gesamt-TA is set to 0 as per request
-            document.getElementById("gesamtTA").textContent = "0.0";
-
-            // Gesamt-Teig calculation
-            const gesamtTeig = stMehlGesamt * 2 + htMehl + (htMehl * 0.8) + (mehlmenge * 0.02);
-            document.getElementById("gesamtTeig").textContent = gesamtTeig.toFixed(1);
+            const htWasser = 0.8 * htMehl;
+            const htSalz = mehlmenge * 0.02;
+            const gesamtTa = (mehlmenge + stMehlGesamt + htWasser) / mehlmenge * 100;
+            const gesamtTeig = (stMehlGesamt * 2) + htMehl + htWasser + htSalz;
+            
+            // Ergebnisse anzeigen
+            document.getElementById('st-anstellgut').textContent = Math.round(stAnstellgut);
+            document.getElementById('st-mehl-gesamt').textContent = Math.round(stMehlGesamt);
+            document.getElementById('st-mehl-1').textContent = Math.round(stMehl1);
+            document.getElementById('st-wasser-1').textContent = Math.round(stWasser1);
+            document.getElementById('st-mehl-2').textContent = Math.round(stMehl2);
+            document.getElementById('st-wasser-2').textContent = Math.round(stWasser2);
+            document.getElementById('st-mehl-3').textContent = Math.round(stMehl3);
+            document.getElementById('st-wasser-3').textContent = Math.round(stWasser3);
+            document.getElementById('ht-mehl').textContent = Math.round(htMehl);
+            document.getElementById('ht-wasser').textContent = Math.round(htWasser);
+            document.getElementById('ht-salz').textContent = Math.round(htSalz);
+            document.getElementById('gesamt-ta').textContent = Math.round(gesamtTa);
+            document.getElementById('gesamt-teig').textContent = Math.round(gesamtTeig);
         }
-
-        // Initial calculation on page load
-        calculateResults();
+        
+        // Initial calculation
+        calculate();
     </script>
 </body>
 </html>
