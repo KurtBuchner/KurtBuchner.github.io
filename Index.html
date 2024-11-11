@@ -165,7 +165,7 @@
             const stMehl3 = stMehlGesamt * 250/430;
             const stWasser3 = stMehlGesamt * 304/430;
             const htMehl = mehlmenge * (1 - versaeuerung / 100);
-            const htWasser = 0.8 * htMehl;
+            const htWasser = (ta - 100)/100 * htMehl;
             const htSalz = mehlmenge * 0.02;
             const gesamtTa = (mehlmenge + stMehlGesamt + htWasser) / mehlmenge * 100;
             const gesamtTeig = (stMehlGesamt * 2) + htMehl + htWasser + htSalz;
