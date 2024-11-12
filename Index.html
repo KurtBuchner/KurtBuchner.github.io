@@ -147,6 +147,10 @@
             <span class="result-label">Gesamt-Teig</span>
             <span id="gesamt-teig" class="result-value">0</span>
         </div>
+	<div class="result-box">
+            <span class="result-label">Gesamt-ST</span>
+            <span id="gesamt-ST" class="result-value">0</span>
+        </div>
     </div>
 
     <script>
@@ -169,6 +173,7 @@
             const htSalz = mehlmenge * 0.02;
             const gesamtTa = (mehlmenge + stMehlGesamt + htWasser) / mehlmenge * 100;
             const gesamtTeig = (stMehlGesamt * 2) + htMehl + htWasser + htSalz;
+				const gesamtST = (stMehlGesamt * 2);
             
             // Ergebnisse anzeigen
             document.getElementById('st-anstellgut').textContent = Math.round(stAnstellgut);
@@ -184,6 +189,7 @@
             document.getElementById('ht-salz').textContent = Math.round(htSalz);
             document.getElementById('gesamt-ta').textContent = Math.round(gesamtTa);
             document.getElementById('gesamt-teig').textContent = Math.round(gesamtTeig);
+		document.getElementById('gesamt-ST').textContent = Math.round(gesamtST);
         }
         
         // Initial calculation
