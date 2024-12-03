@@ -97,7 +97,7 @@
     <div class="results">
         <div class="result-box">
             <span class="result-label">ST-Anstellgut</span>
-            <span id="st-anstellgut" class="result-value">1</span>
+            <span id="st-anstellgut" class="result-value">0</span>
         </div>
         <div class="result-box">
             <span class="result-label">ST-Mehl gesamt</span>
@@ -105,11 +105,11 @@
         </div>
         <div class="result-box">
             <span class="result-label">Stufe 1 ST-Mehl</span>
-            <span id="st-mehl-1" class="result-value">1</span>
+            <span id="st-mehl-1" class="result-value">0</span>
         </div>
         <div class="result-box">
             <span class="result-label">Stufe 1 ST-Wasser</span>
-            <span id="st-wasser-1" class="result-value">1</span>
+            <span id="st-wasser-1" class="result-value">0</span>
         </div>
         <div class="result-box">
             <span class="result-label">Stufe 2 ST-Mehl</span>
@@ -137,7 +137,7 @@
         </div>
         <div class="result-box">
             <span class="result-label">HT-Salz</span>
-            <span id="ht-salz" class="result-value">1</span>
+            <span id="ht-salz" class="result-value">0</span>
         </div>
         <div class="result-box">
             <span class="result-label">Gesamt-TA</span>
@@ -176,7 +176,7 @@
 				const gesamtST = (stMehlGesamt * 2);
             
             // Ergebnisse anzeigen
-            document.getElementById('st-anstellgut').textContent = Math.round(stAnstellgut);
+            document.getElementById('st-anstellgut').textContent = stAnstellgut.toFixed(1);
             document.getElementById('st-mehl-gesamt').textContent = Math.round(stMehlGesamt);
             document.getElementById('st-mehl-1').textContent = Math.round(stMehl1);
             document.getElementById('st-wasser-1').textContent = Math.round(stWasser1);
@@ -186,7 +186,7 @@
             document.getElementById('st-wasser-3').textContent = Math.round(stWasser3);
             document.getElementById('ht-mehl').textContent = Math.round(htMehl);
             document.getElementById('ht-wasser').textContent = Math.round(htWasser);
-            document.getElementById('ht-salz').textContent = Math.round(htSalz);
+            document.getElementById('ht-salz').textContent = htSalz.toFixed(1);
             document.getElementById('gesamt-ta').textContent = Math.round(gesamtTa);
             document.getElementById('gesamt-teig').textContent = Math.round(gesamtTeig);
 		document.getElementById('gesamt-ST').textContent = Math.round(gesamtST);
