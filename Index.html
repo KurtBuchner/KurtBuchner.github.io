@@ -154,7 +154,7 @@
             <span id="gesamt-ST" class="result-value">0</span>
         </div>
     </div>
-
+	<script src="script.js"></script>
     <script>
         function calculate() {
             const mehlmenge = parseFloat(document.getElementById('mehlmenge').value) || 0;
@@ -198,4 +198,24 @@
         calculate();
     </script>
 </body>
+// IDs der Eingabefelder
+const inputIds = ["mehlmenge", "Versaeuerung", "ta"];
+
+// Werte beim Laden der Seite aus dem localStorage laden
+document.addEventListener("DOMContentLoaded", () => {
+  inputIds.forEach(id => {
+    const savedValue = localStorage.getItem(id); // Wert aus localStorage holen
+    if (savedValue !== null) {
+      document.getElementById(id).value = savedValue; // Wert ins Feld einfügen
+    }
+  });
+});
+
+// Werte speichern, wenn die Seite geschlossen wird
+window.addEventListener("beforeunload", () => {
+  inputIds.forEach(id => {
+    const value = document.getElementById(id).value; // Wert aus Feld holen
+    localStorage.setItem(id, value); // Wert im localStorage speichern
+  });
+});
 </html>
