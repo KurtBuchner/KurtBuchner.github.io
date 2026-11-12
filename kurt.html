@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kurt – Mein Blog</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #263238;
+      background: #f3f5f7;
+    }
+
+    header {
+      padding: 38px 24px;
+      color: white;
+      background: #315c69;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      margin-bottom: 0;
+      color: #dce9ec;
+    }
+
+    .layout {
+      display: flex;
+      min-height: calc(100vh - 150px);
+    }
+
+    aside {
+      flex: 0 0 220px;
+      padding: 24px 16px;
+      background: #23434c;
+    }
+
+    aside h2 {
+      margin: 0 0 16px;
+      color: #dce9ec;
+      font-size: 1.1rem;
+    }
+
+    aside nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    aside a {
+      display: block;
+      padding: 12px;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    aside a:hover,
+    aside a[aria-current="page"] {
+      background: #477986;
+    }
+
+    main {
+      width: min(800px, 100%);
+      margin: 32px auto;
+      padding: 0 24px;
+    }
+
+    article {
+      margin-bottom: 22px;
+      padding: 24px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px #20304012;
+    }
+
+    article h2 {
+      margin-top: 0;
+      color: #315c69;
+    }
+
+    .datum {
+      color: #718087;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      padding: 20px;
+      text-align: center;
+      color: #dce9ec;
+      background: #23434c;
+    }
+
+    @media (max-width: 600px) {
+      .layout {
+        flex-direction: column;
+      }
+
+      aside {
+        flex-basis: auto;
+      }
+
+      aside nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      main {
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Kurts Blog</h1>
+    <p>Gedanken, Erlebnisse und kleine Entdeckungen</p>
+  </header>
+
+  <div class="layout">
+    <aside>
+      <h2>Menü</h2>
+      <nav aria-label="Hauptmenü">
+        <a href="Index.html">Home</a>
+        <a href="https://kurtbuchner.github.io/Index2a.html">Über mich</a>
+        <a href="https://kurtbuchner.github.io/Index2a.html">Brotberechnung</a>
+      </nav>
+    </aside>
+
+    <main>
+      <article>
+        <p class="datum">Willkommen</p>
+        <h2>Hallo, ich bin Kurt!</h2>
+        <p>
+          Schön, dass du meinen Blog besuchst. Hier findest du Beiträge,
+          Gedanken und nützliche Informationen.
+        </p>
+      </article>
+
+      <article>
+        <p class="datum">Mein Blog</p>
+        <h2>Was gibt es Neues?</h2>
+        <p>
+          Hier kannst du deine Blogbeiträge eintragen. Ergänze einfach weitere
+          <code>&lt;article&gt;</code>-Elemente mit Überschrift und Text.
+        </p>
+      </article>
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Kurt</p>
+  </footer>
+</body>
+</html>
